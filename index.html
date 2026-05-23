@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent Choice Lab - Make AI coding agents pick your devtool</title>
+  <meta name="description" content="Agent Choice Lab scores whether AI coding agents can discover, understand, and choose your developer tool from your docs." />
+  <meta property="og:title" content="Agent Choice Lab - Find out if AI coding agents can choose your devtool" />
+  <meta property="og:description" content="Paste your docs and get an agent pick-rate score, AGENTS.md snippet, and first-week monetization plan." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://speedranger.github.io/agent-choice-lab/" />
+  <meta property="og:image" content="https://speedranger.github.io/agent-choice-lab/ph-gallery-1-hero.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Agent Choice Lab" />
+  <meta name="twitter:description" content="The SEO audit for AI coding agents." />
+  <meta name="twitter:image" content="https://speedranger.github.io/agent-choice-lab/ph-gallery-1-hero.png" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; object-src 'none'; base-uri 'self'; form-action 'self' https://github.com; upgrade-insecure-requests" />
+  <link rel="canonical" href="https://speedranger.github.io/agent-choice-lab/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Inconsolata:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Agent Choice Lab home">
+        <span class="brand-mark" aria-hidden="true">ACL</span>
+        <span>Agent Choice Lab</span>
+      </a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#scanner">Scanner</a>
+        <a href="#sample-audit">Sample</a>
+        <a href="#why-now">Why now</a>
+        <a href="#launch-kit">Launch kit</a>
+      </nav>
+      <a class="nav-cta" href="#scanner">Run scan</a>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Live product: agent pick-rate scanner</p>
+          <h1 id="hero-title">Agent Choice Lab</h1>
+          <p class="hero-lede">
+            The SEO-style audit for AI coding agents. Paste your docs, README,
+            or launch copy and see whether Codex, Claude Code, Cursor, Copilot,
+            and workflow agents can tell when to choose your devtool.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#scanner">Score my docs</a>
+            <a class="button secondary" href="#buy">Request $49 fix pass</a>
+            <button class="button secondary" type="button" id="loadSampleTop">Load demo scan</button>
+          </div>
+          <div class="hero-proof" aria-label="Product proof">
+            <span>Live scanner</span>
+            <span>No login</span>
+            <span>Client-side only</span>
+            <span>Sample audit included</span>
+          </div>
+        </div>
+
+        <aside class="hero-console" aria-label="Example agent choice report">
+          <div class="console-toolbar">
+            <span>live-report.json</span>
+            <span>sample devtool scan</span>
+          </div>
+          <div class="score-orbit" aria-label="Sample pick-rate score">
+            <strong id="heroScore">83</strong>
+            <span>pick-rate</span>
+          </div>
+          <div class="console-grid">
+            <div class="console-cell pass">
+              <span>clear use case</span>
+              <strong>PASS</strong>
+            </div>
+            <div class="console-cell pass">
+              <span>agent install path</span>
+              <strong>PASS</strong>
+            </div>
+            <div class="console-cell warn">
+              <span>competitor contrast</span>
+              <strong>THIN</strong>
+            </div>
+            <div class="console-cell fail">
+              <span>machine docs</span>
+              <strong>MISSING</strong>
+            </div>
+          </div>
+          <pre class="console-output">recommendation:
+  add /llms-full.txt
+  publish AGENTS.md snippet
+  show "use when / avoid when"
+  expose MCP + CLI examples</pre>
+        </aside>
+      </section>
+
+      <section class="research-strip" aria-label="Market evidence">
+        <div>
+          <span>Product Hunt signal</span>
+          <strong>May development launches include agent VMs, Cursor, Amp, and MCP-native tools.</strong>
+        </div>
+        <div>
+          <span>Agent-engineer signal</span>
+          <strong>Recent PH AI-engineer products cluster around coding agents, QA, repos, and workflows.</strong>
+        </div>
+        <div>
+          <span>Social signal</span>
+          <strong>Reddit founders are asking whether agents are becoming a new SaaS distribution channel.</strong>
+        </div>
+      </section>
+
+      <section class="scanner" id="scanner" aria-labelledby="scanner-title">
+        <div class="section-head">
+          <p class="eyebrow">Working product</p>
+          <h2 id="scanner-title">Paste your docs. Get the agent pick-rate report.</h2>
+          <p>
+            This client-side scanner looks for the signals agentic devtools can
+            actually use: crisp job framing, install commands, integration
+            metadata, machine-readable docs, safety boundaries, and proof.
+          </p>
+        </div>
+
+        <div class="workbench">
+          <form class="scan-form" id="scanForm">
+            <div class="field-grid">
+              <label>
+                Product name
+                <input id="productName" name="productName" type="text" value="TraceKit" autocomplete="off" />
+              </label>
+              <label>
+                Primary buyer
+                <input id="buyer" name="buyer" type="text" value="Developer tool founders" autocomplete="off" />
+              </label>
+              <label>
+                Main competitor
+                <input id="competitor" name="competitor" type="text" value="generic docs + SEO tools" autocomplete="off" />
+              </label>
+              <label>
+                Price point
+                <input id="price" name="price" type="text" value="$49 audit / $19 monthly monitor" autocomplete="off" />
+              </label>
+            </div>
+
+            <label class="textarea-label">
+              Docs, README, homepage copy, or launch draft
+              <textarea id="docInput" name="docInput" spellcheck="false"></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button class="button primary" type="submit">Analyze pick-rate</button>
+              <button class="button secondary" id="loadSample" type="button">Load sample</button>
+              <button class="button ghost" id="clearInput" type="button">Clear</button>
+            </div>
+          </form>
+
+          <aside class="report-panel" aria-live="polite">
+            <div class="report-topline">
+              <div>
+                <span>Pick-rate score</span>
+                <strong id="scoreValue">0</strong>
+              </div>
+              <p id="scoreLabel">Awaiting scan</p>
+            </div>
+            <div class="score-bar" aria-hidden="true">
+              <span id="scoreFill"></span>
+            </div>
+            <div id="findings" class="findings"></div>
+            <div class="report-actions" aria-label="Report actions">
+              <button class="copy-button report-copy" id="copyScore" type="button">Copy score summary</button>
+              <button class="copy-button report-copy" id="copyAuditRequest" type="button">Copy audit request</button>
+              <a class="copy-button report-copy" id="auditRequestLink" href="https://github.com/SpeedRanger/agent-choice-lab/issues/new?template=audit_request.yml">Open public audit request</a>
+            </div>
+            <p class="report-privacy-note">
+              Audit requests start in a public GitHub issue. The copied request
+              excludes pasted docs; use public URLs only. Payment and delivery
+              move to your public contact path after review.
+            </p>
+          </aside>
+        </div>
+
+        <div class="output-grid">
+          <article class="output-card">
+            <div class="card-head">
+              <h3>Agent-ready positioning</h3>
+              <button class="copy-button" type="button" data-copy-target="positioningOutput">Copy</button>
+            </div>
+            <pre id="positioningOutput"></pre>
+          </article>
+          <article class="output-card">
+            <div class="card-head">
+              <h3>AGENTS.md snippet</h3>
+              <button class="copy-button" type="button" data-copy-target="agentsOutput">Copy</button>
+            </div>
+            <pre id="agentsOutput"></pre>
+          </article>
+          <article class="output-card wide">
+            <div class="card-head">
+              <h3>Seven-day $100 sprint</h3>
+              <button class="copy-button" type="button" data-copy-target="launchOutput">Copy</button>
+            </div>
+            <pre id="launchOutput"></pre>
+          </article>
+        </div>
+      </section>
+
+      <section class="sample-audit" id="sample-audit" aria-labelledby="sample-title">
+        <div class="section-head compact">
+          <p class="eyebrow">Paid audit preview</p>
+          <h2 id="sample-title">What the `$49` fix pass actually returns.</h2>
+          <p>
+            The paid audit is not another score screenshot. It gives the founder
+            a before/after patch for agent-readable positioning, install routing,
+            machine docs, and misuse boundaries.
+          </p>
+        </div>
+
+        <div class="audit-preview">
+          <article>
+            <span>Before</span>
+            <h3>Agents could install it, but could not decide when to choose it.</h3>
+            <pre>Score: 58 / 100
+
+Missing:
+- "use when / avoid when"
+- competitor contrast
+- secret handling
+- machine-readable docs
+- fresh changelog signal</pre>
+          </article>
+
+          <article class="after">
+            <span>After</span>
+            <h3>Agents get a routing rule, safe-use boundary, and copy-paste setup.</h3>
+            <pre>Score: 86 / 100
+
+Patched:
+- AGENTS.md snippet
+- llms-full.txt outline
+- quickstart rewrite
+- "choose us over X when..."
+- security boundary block</pre>
+          </article>
+
+          <aside>
+            <h3>Audit deliverable</h3>
+            <p>One concise Markdown report, one docs patch, and the exact snippets to publish.</p>
+            <a class="button primary" href="sample-audit.md">Read sample report</a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="why-now" id="why-now" aria-labelledby="why-now-title">
+        <div class="section-head compact">
+          <p class="eyebrow">Why this wedge</p>
+          <h2 id="why-now-title">AI search is crowded. Agent selection is still early.</h2>
+        </div>
+        <div class="thesis-grid">
+          <article>
+            <span>01</span>
+            <h3>Agents do not browse like humans.</h3>
+            <p>They parse docs, package metadata, tool manifests, examples, and instructions. A product can rank in SEO and still be hard for agents to choose.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Developer tools have an immediate buyer.</h3>
+            <p>Founders already spend on docs, SEO, launch copy, and onboarding. A narrow agent-readiness audit can sell before a full SaaS exists.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>The output is launch-native.</h3>
+            <p>Every scan creates a shareable score, a concrete fix list, and copy that fits Product Hunt, Reddit, GitHub, and founder channels.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="launch-kit" id="launch-kit" aria-labelledby="launch-title">
+        <div>
+          <p class="eyebrow">Launch kit</p>
+          <h2 id="launch-title">Product Hunt angle: the SEO audit for AI coding agents.</h2>
+          <p>
+            The fastest revenue path is concierge: sell three $49 audits in founder
+            communities, then turn repeated fixes into the recurring monitor.
+          </p>
+          <p>
+            Choose Agent Choice Lab over generic AI visibility dashboards when
+            the buyer needs docs that tell coding agents exactly when to pick,
+            install, and safely use a developer tool.
+          </p>
+          <div class="proof-list" aria-label="Launch proof points">
+            <span>Free scanner</span>
+            <span>$49 manual audit</span>
+            <span>$19 weekly monitor</span>
+          </div>
+        </div>
+        <div class="launch-copy" id="buy">
+          <p class="offer-kicker">Launch offer</p>
+          <h3>$49 agent pick-rate audit</h3>
+          <p>
+            Three manual slots this week. You get a score, top missing signals,
+            an AGENTS.md or llms-full.txt snippet, and a before/after docs patch.
+          </p>
+          <ul class="offer-list">
+            <li>For SDKs, APIs, CLIs, MCP servers, and agent workflow tools.</li>
+            <li>Results delivered as a concise Markdown report.</li>
+            <li>Weekly drift monitor offered only after the first fix pass.</li>
+          </ul>
+          <p class="public-note">
+            Start with a public GitHub request using public URLs only. Never
+            paste secrets, private docs, customer data, or payment details there;
+            payment and delivery move to your public contact path after review.
+          </p>
+          <div class="price-stack">
+            <a class="button primary" href="https://github.com/SpeedRanger/agent-choice-lab/issues/new?template=audit_request.yml">Request $49 audit</a>
+            <a class="button secondary" href="#scanner">Run the live demo</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

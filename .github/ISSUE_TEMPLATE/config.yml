@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Run the free scanner
+    url: https://speedranger.github.io/agent-choice-lab/
+    about: Paste your docs and get the free pick-rate scan first.

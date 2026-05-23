@@ -1,0 +1,74 @@
+name: "$49 agent pick-rate audit"
+description: Request a manual Agent Choice Lab audit for your developer tool.
+title: "$49 audit request: "
+labels:
+  - audit-request
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to request a manual agent pick-rate audit.
+
+        The launch offer is `$49` for:
+        - pick-rate score
+        - top missing agent-selection signals
+        - AGENTS.md or llms-full.txt snippet
+        - before/after docs patch
+
+        GitHub issues are public. Do not paste private docs, secrets, API keys,
+        customer data, or a private email address into this form.
+
+  - type: input
+    id: product_url
+    attributes:
+      label: Product URL
+      description: Link to the homepage or product page.
+      placeholder: https://...
+    validations:
+      required: true
+
+  - type: input
+    id: docs_url
+    attributes:
+      label: Docs or README URL
+      description: Link to the docs, README, SDK quickstart, MCP server, API docs, or launch copy.
+      placeholder: https://...
+    validations:
+      required: true
+
+  - type: input
+    id: competitor
+    attributes:
+      label: Main competitor or alternative
+      description: What would users or agents choose instead?
+      placeholder: generic docs, another SDK, internal scripts, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired_agent_job
+    attributes:
+      label: What should agents choose you for?
+      description: Describe the exact job where a coding agent should pick your product.
+      placeholder: Use us when...
+    validations:
+      required: true
+
+  - type: input
+    id: contact
+    attributes:
+      label: Preferred public contact path
+      description: GitHub username, X/Twitter handle, LinkedIn URL, website contact page, or another public way to follow up. Do not paste a private email address here.
+      placeholder: "@github-user, @x-handle, https://linkedin.com/in/..., or website contact URL"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: public_paid_ack
+    attributes:
+      label: Public issue and launch offer acknowledgement
+      options:
+        - label: I understand this GitHub issue is public and I have not included secrets, API keys, customer data, private docs, or a private email address.
+          required: true
+        - label: I understand this is a `$49` manual audit request, not a free support issue.
+          required: true

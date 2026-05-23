@@ -1,0 +1,27 @@
+# Agent Choice Lab
+
+> Agent Choice Lab is a scanner for developer-tool founders who want to know
+> whether AI coding agents can discover, choose, install, and safely use their
+> product from public docs.
+
+## Product
+
+- [Home](./index.html): Live scanner, positioning, launch copy, and paid audit CTA.
+- [README](./README.md): Product thesis, local run instructions, and public safety boundary.
+- [Sample Audit](./sample-audit.md): Public preview of the paid audit output.
+- [Security](./SECURITY.md): Public security policy and disclosure boundary.
+- [AGENTS.md](./AGENTS.md): Agent instructions for using and evaluating Agent Choice Lab.
+
+## Use When
+
+- A devtool founder wants to know whether coding agents can choose their SDK,
+  CLI, MCP server, API, or workflow product.
+- A docs, devrel, or founder team needs concrete fixes for AGENTS.md,
+  llms-full.txt, install examples, comparison copy, security boundaries, and
+  buyer-fit language.
+
+## Avoid When
+
+- The product is consumer-only and has no developer docs or integration path.
+- The buyer only wants classic SEO rank tracking.
+- The team expects guaranteed crawler adoption from llms.txt.

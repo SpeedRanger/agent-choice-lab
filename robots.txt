@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://speedranger.github.io/agent-choice-lab/sitemap.xml
