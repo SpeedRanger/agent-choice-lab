@@ -592,6 +592,7 @@ textarea:focus {
 }
 
 #auditRequestLink,
+#copyAuditRequest,
 #downloadScoreCard {
   grid-column: 1 / -1;
 }

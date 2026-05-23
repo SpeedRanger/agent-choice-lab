@@ -119,6 +119,8 @@ const scoreLabel = document.querySelector("#scoreLabel");
 const scoreFill = document.querySelector("#scoreFill");
 const findings = document.querySelector("#findings");
 const copyScore = document.querySelector("#copyScore");
+const copyXPost = document.querySelector("#copyXPost");
+const copyRedditPost = document.querySelector("#copyRedditPost");
 const downloadScoreCard = document.querySelector("#downloadScoreCard");
 const copyAuditRequest = document.querySelector("#copyAuditRequest");
 const auditRequestLink = document.querySelector("#auditRequestLink");
@@ -293,10 +295,59 @@ ${visibleFindings}
 Scan: https://speedranger.github.io/agent-choice-lab/`;
 }
 
+function getPlainFindingTitles(limit = 3) {
+  return [...findings.querySelectorAll(".finding strong")]
+    .slice(0, limit)
+    .map((item) => item.textContent.replace(/^(Fix|Keep):\s*/, ""));
+}
+
 function getVisibleFindingLines(limit = 3) {
   return [...findings.querySelectorAll(".finding")]
     .slice(0, limit)
     .map((finding) => finding.innerText.replace(/\n+/g, ": "));
+}
+
+function getXPost() {
+  const name = productName.value.trim() || "my devtool";
+  const score = scoreValue.textContent.trim() || "0";
+  const label = scoreLabel.textContent.trim() || "Awaiting scan";
+  const gaps = getPlainFindingTitles(2);
+  const gapLine = gaps.length
+    ? `Biggest agent-selection gaps: ${gaps.join(" + ")}.`
+    : "No obvious critical gaps, which is rare enough to double-check.";
+
+  return `Ran ${name} through Agent Choice Lab.
+
+Agent pick-rate: ${score}/100 (${label}).
+
+${gapLine}
+
+Useful framing: SEO tells humans where to click. This checks whether coding agents know when to choose, install, and safely use the tool.
+
+https://speedranger.github.io/agent-choice-lab/`;
+}
+
+function getRedditPost() {
+  const name = productName.value.trim() || "my devtool";
+  const score = scoreValue.textContent.trim() || "0";
+  const label = scoreLabel.textContent.trim() || "Awaiting scan";
+  const gaps = getPlainFindingTitles(3);
+  const gapLines = gaps.length
+    ? gaps.map((gap) => `- ${gap}`).join("\n")
+    : "- No obvious critical gaps in the free scan.";
+
+  return `I tested ${name} for "agent pick-rate" and got ${score}/100 (${label}).
+
+The idea: lots of devtools are readable by humans but still hard for coding agents to choose because the docs do not spell out use cases, install paths, machine-readable docs, safety boundaries, or competitor contrast.
+
+Top gaps from the scan:
+${gapLines}
+
+Question for other devtool founders: are you already writing docs for agents, or still treating this like normal SEO?
+
+Scanner: https://speedranger.github.io/agent-choice-lab/
+
+No affiliation required, and do not paste private docs or secrets into public threads.`;
 }
 
 function wrapText(context, text, x, y, maxWidth, lineHeight, maxLines) {
@@ -473,6 +524,8 @@ document.querySelector("#loadSample").addEventListener("click", loadSample);
 document.querySelector("#loadSampleTop").addEventListener("click", loadSample);
 document.querySelector("#clearInput").addEventListener("click", clearForm);
 copyScore.addEventListener("click", () => copyToClipboard(copyScore, getScoreSummary()));
+copyXPost.addEventListener("click", () => copyToClipboard(copyXPost, getXPost()));
+copyRedditPost.addEventListener("click", () => copyToClipboard(copyRedditPost, getRedditPost()));
 downloadScoreCard.addEventListener("click", downloadScoreCardImage);
 copyAuditRequest.addEventListener("click", () => copyToClipboard(copyAuditRequest, getAuditRequestPacket()));
 
