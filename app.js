@@ -119,6 +119,7 @@ const scoreLabel = document.querySelector("#scoreLabel");
 const scoreFill = document.querySelector("#scoreFill");
 const findings = document.querySelector("#findings");
 const copyScore = document.querySelector("#copyScore");
+const downloadScoreCard = document.querySelector("#downloadScoreCard");
 const copyAuditRequest = document.querySelector("#copyAuditRequest");
 const auditRequestLink = document.querySelector("#auditRequestLink");
 const positioningOutput = document.querySelector("#positioningOutput");
@@ -292,6 +293,123 @@ ${visibleFindings}
 Scan: https://speedranger.github.io/agent-choice-lab/`;
 }
 
+function getVisibleFindingLines(limit = 3) {
+  return [...findings.querySelectorAll(".finding")]
+    .slice(0, limit)
+    .map((finding) => finding.innerText.replace(/\n+/g, ": "));
+}
+
+function wrapText(context, text, x, y, maxWidth, lineHeight, maxLines) {
+  const words = text.split(/\s+/).filter(Boolean);
+  let line = "";
+  let lines = 0;
+
+  for (const word of words) {
+    const testLine = line ? `${line} ${word}` : word;
+    if (context.measureText(testLine).width > maxWidth && line) {
+      context.fillText(line, x, y);
+      y += lineHeight;
+      lines += 1;
+      line = word;
+      if (lines >= maxLines) return y;
+    } else {
+      line = testLine;
+    }
+  }
+
+  if (line && lines < maxLines) {
+    context.fillText(line, x, y);
+    y += lineHeight;
+  }
+
+  return y;
+}
+
+function sanitizeFilenamePart(value) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 42) || "agent-choice-lab";
+}
+
+function downloadScoreCardImage() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1200;
+  canvas.height = 675;
+  const context = canvas.getContext("2d");
+  const name = productName.value.trim() || "Your devtool";
+  const score = scoreValue.textContent.trim() || "0";
+  const label = scoreLabel.textContent.trim() || "Awaiting scan";
+  const lines = getVisibleFindingLines(3);
+
+  context.fillStyle = "#050606";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.strokeStyle = "rgba(250, 255, 105, 0.16)";
+  context.lineWidth = 1;
+  for (let x = 0; x <= canvas.width; x += 48) {
+    context.beginPath();
+    context.moveTo(x, 0);
+    context.lineTo(x, canvas.height);
+    context.stroke();
+  }
+  for (let y = 0; y <= canvas.height; y += 48) {
+    context.beginPath();
+    context.moveTo(0, y);
+    context.lineTo(canvas.width, y);
+    context.stroke();
+  }
+
+  context.fillStyle = "#faff69";
+  context.fillRect(64, 56, 72, 72);
+  context.fillStyle = "#000000";
+  context.font = "700 21px Inconsolata, Consolas, monospace";
+  context.fillText("ACL", 82, 100);
+
+  context.fillStyle = "#ffffff";
+  context.font = "900 44px Inter, Arial, sans-serif";
+  context.fillText("Agent Choice Lab", 160, 92);
+  context.fillStyle = "#a8adb3";
+  context.font = "600 24px Inter, Arial, sans-serif";
+  context.fillText("Agent pick-rate report", 160, 128);
+
+  context.fillStyle = "#faff69";
+  context.font = "900 176px Inter, Arial, sans-serif";
+  context.fillText(score, 64, 330);
+  context.fillStyle = "#a8adb3";
+  context.font = "700 28px Inconsolata, Consolas, monospace";
+  context.fillText(`${label.toUpperCase()} / 100`, 70, 372);
+
+  context.fillStyle = "#ffffff";
+  context.font = "900 54px Inter, Arial, sans-serif";
+  wrapText(context, name, 520, 188, 580, 60, 2);
+
+  context.fillStyle = "#dce2e7";
+  context.font = "700 24px Inter, Arial, sans-serif";
+  let y = 304;
+  const safeLines = lines.length ? lines : ["No critical public-safe gaps found."];
+  safeLines.forEach((line) => {
+    context.fillStyle = "rgba(255, 255, 255, 0.08)";
+    context.fillRect(520, y - 34, 600, 82);
+    context.strokeStyle = "rgba(255, 255, 255, 0.16)";
+    context.strokeRect(520, y - 34, 600, 82);
+    context.fillStyle = "#dce2e7";
+    y = wrapText(context, line, 544, y, 548, 27, 2) + 28;
+  });
+
+  context.fillStyle = "#faff69";
+  context.font = "700 26px Inconsolata, Consolas, monospace";
+  context.fillText("Run your scan: speedranger.github.io/agent-choice-lab", 64, 610);
+
+  const link = document.createElement("a");
+  link.download = `${sanitizeFilenamePart(name)}-agent-pick-rate.png`;
+  link.href = canvas.toDataURL("image/png");
+  document.body.append(link);
+  link.click();
+  link.remove();
+}
+
 function getAuditRequestPacket() {
   const visibleFindings = [...findings.querySelectorAll(".finding")]
     .slice(0, 3)
@@ -355,6 +473,7 @@ document.querySelector("#loadSample").addEventListener("click", loadSample);
 document.querySelector("#loadSampleTop").addEventListener("click", loadSample);
 document.querySelector("#clearInput").addEventListener("click", clearForm);
 copyScore.addEventListener("click", () => copyToClipboard(copyScore, getScoreSummary()));
+downloadScoreCard.addEventListener("click", downloadScoreCardImage);
 copyAuditRequest.addEventListener("click", () => copyToClipboard(copyAuditRequest, getAuditRequestPacket()));
 
 form.addEventListener("submit", (event) => {

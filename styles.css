@@ -591,7 +591,8 @@ textarea:focus {
   text-decoration: none;
 }
 
-#auditRequestLink {
+#auditRequestLink,
+#downloadScoreCard {
   grid-column: 1 / -1;
 }
 
